@@ -13,6 +13,4 @@ This file loads in all data sets, splits them, and writes them out. A path is ha
 If the data is saved in the default place, there is no need to change any paths here. 
 
 # step 3: POS_embeddings.ipynb
-I could not manage to convert this notebook to a script, because it gave me a lot of weird errors. You can just run them via Jupyter. 
-
-You should specify the path to your embeddings model at the top of the notebook, right under the import statements. Again, the paths to the data should be fine. 
+I could not manage to convert this notebook to a script, because it gave me a lot of weird errors. You can just run them via Jupyter Notebook. You should specify the path to your embeddings model at the top of the notebook, right under the import statements. Again, the paths to the data should be fine. 
