@@ -6,6 +6,8 @@
 - NN_numbers.py contains the number recognition task, where the most elaborate documentation is added. Most of the code is reused for the POS-tagging task, but the extensive explanations are not repeated there for the sake of readability. 
 - see the rest of the files below.  
 
+The following files should be run from the command line: 
+
 ## step 1: preproccesing.py
 This file loads in all data sets, splits them, and writes them out. A path is hardcoded at the end of the code to the 'data' file included in this repository, where the data is saved. 
 
