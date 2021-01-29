@@ -11,12 +11,12 @@ embeddings_path = "/Users/alessandrapolimeno/Documents/VU/models/sonar-160.tar"
 
 ### LOAD DATA 
 # training data 
-train_path = "../data/pos_data_train.csv"
+train_path = "data/pos_data_train.csv"
 with open(train_path, "r") as infile: 
     train_data = infile.readlines()
 
 # test data
-test_path = "../data/pos_data_test.csv"
+test_path = "data/pos_data_test.csv"
 with open(test_path, "r") as infile: 
     test_data = infile.readlines()
     
