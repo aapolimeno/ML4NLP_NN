@@ -7,7 +7,7 @@ from class_NN import neuralNetwork
 from utils import extract_info, get_embeddings
 
 # insert path to embeddings model here
-embeddings_path = "/Users/alessandrapolimeno/Documents/VU/models/sonar-160.tar"
+embeddings_path = ""
 
 ### LOAD DATA 
 # training data 
@@ -24,7 +24,7 @@ with open(test_path, "r") as infile:
 #train_data = train_data[:1000]
 #test_data = test_data[:100]
 
-data_all = test_data + train_data # for training the embeddings model on 
+data_all = test_data + train_data # for training the embeddings model on
 
 ### EXTRACT INFORMATION 
 # get relevant information from datasets 
@@ -51,10 +51,12 @@ embeddings_model = get_embeddings(embeddings_path, tokens)
 
 epochs = 5 # can be experimented with 
 for e in range(epochs):
+    # match token with gold label
     for inp, targ in zip(tokens_tr , targets_tr):
         inp = inp.lower()
         if inp in embeddings_model:
             embedding = embeddings_model[inp]
+            # train nn with the word embedding for token + gold label
             nn.train(embedding, targ) 
         else:
             pass
@@ -64,6 +66,7 @@ scorecard = []
 predicted_labels = []
 selected_targets = []
 
+# match token with gold POS label
 for inp, targ in zip(tokens_te, targets_te):
     inp = inp.lower()
     try: 
@@ -86,7 +89,6 @@ for inp, targ in zip(tokens_te, targets_te):
             
     except: 
         pass
-
     
 scorecard_array = np.asarray(scorecard)
 print(f"accuracy = ", scorecard_array.sum() / scorecard_array.size)

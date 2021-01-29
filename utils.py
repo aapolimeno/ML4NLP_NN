@@ -21,14 +21,15 @@ def preprocess(pos_tags, tokens):
     return pos_list, tok_list 
 
 
-def extract_info(data, output_nodes = 12):
+def extract_info(data_in, output_nodes = 12):
     """
-    This function extracts all information that is required for training and testing the neural network.
+    This function extracts information (tokens, pos_tags, gold label) from a dataset
+    and returns them in separate lists
     
-    :param data: 
-    :param output_nodes: number of output nodes of the NN (12 in the current case )
+    :param data_in: a list with lists containing 2 items
+    :param output_nodes: number of output nodes of the NN (default is 12)
     
-    :return: data_out, tokens, pos_tags, targets --> all in separate lists. 
+    :return data_out, tokens, pos_tags, targets: in separate lists.
     
     """
     data_out = []
@@ -36,7 +37,7 @@ def extract_info(data, output_nodes = 12):
     pos_tags = []
     targets = []
 
-    for pair in data:
+    for pair in data_in:
         all_values = pair.strip('\n')
         all_values = all_values.split(';')
         data_out.append(all_values)
@@ -64,9 +65,9 @@ def get_embeddings(embeddings_path, tokens, dimension=160):
     https://blog.keras.io/using-pre-trained-word-embeddings-in-a-keras-model.html
     (accessed 24 Jan 2021)
     
-    :param path: path to downloaded embeddings 
+    :param embeddings_path: path to embeddings file
     :param tokens: list containing all tokens that occur in the data
-    :param dimension: default = 160 
+    :param dimension: dimensions of the embedding vectors (default = 160)
     
     :return embeddings_dictionary: dict containing embeddings for each token (key = token, values = embeddings)
     
@@ -79,7 +80,9 @@ def get_embeddings(embeddings_path, tokens, dimension=160):
     for line in file:
         records = line.split()
         if records:
+            # the first item of each line corresponds to the word
             word = records[0]
+            # only obtain the embeddings for words that occur in the dataset
             if word in tokens:
                 try:
                     vector_dimensions = asarray(records[1:], dtype='float32')

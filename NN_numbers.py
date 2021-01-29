@@ -58,7 +58,7 @@ for e in range(epochs):
 # the input vector is converted to an array, and is transformed 
 # to match the activation function (range 0.1 - 0.99)
 # then, the network is queried, resulting in the output of the network. 
-# the output consists of an array of probabilities of each label.
+# the output consists of an array of probabilities of each label,
 # the highest of which corresponds to the label that is predicted by the nn.
 # if the predicted label is equal to the gold label, a 1 is added to the scorecard.
 # otherwise, a 0 is added. the accuracy is calculated by taking the sum of the numbers 

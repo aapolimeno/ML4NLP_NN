@@ -12,18 +12,21 @@ print(dataset)
 # extract tokens + pos tags
 pos_tags_dev = dataset['validation']['pos_tags']
 tokens_dev = dataset['validation']['tokens']
+# get separate lists for pos_tags and tokens
 pos_list_dev, tok_list_dev = preprocess(pos_tags_dev, tokens_dev)
 
     
 ##### TRAIN SET 
 pos_tags_train = dataset['train']['pos_tags']
 tokens_train = dataset['train']['tokens']
+# get separate lists for pos_tags and tokens
 pos_list_train, tok_list_train = preprocess(pos_tags_train, tokens_train)
 
 
 #### TEST SET 
 pos_tags_test = dataset['test']['pos_tags']
 tokens_test = dataset['test']['tokens']
+# get separate lists for pos_tags and tokens 
 pos_list_test, tok_list_test = preprocess(pos_tags_test, tokens_test)
 
 # match each token with the corresponding POS and add them to a list
