@@ -25,7 +25,7 @@ with open(training_path, "r") as infile:
 test_path = "mnist/mnist_test_10.csv"
 with open(test_path, "r") as infile: 
     test_data = infile.readlines()
-    
+
 #### start training 
 # in this loop, each datapoint in the data set is split to obtain
 # the input (which is transformed to fall within the 0.1 - 0.99 range)
@@ -49,7 +49,7 @@ for e in range(epochs):
         targets = numpy.zeros(output_nodes) + 0.01
         # set the value of the target to 0.99
         targets[int(all_values[0])] = 0.99
-        # start training nn with  the rescaled inputs and target array
+        # start training nn with the rescaled inputs and target array
         nn.train(inputs, targets)
 
 ## test nn with a scorecard
@@ -67,16 +67,16 @@ for e in range(epochs):
 
 scorecard = []
 for record in test_data: 
-    # split on commas, results in the following structure: ['gol
+    # get list with label + vector for each datapoint
     all_values = record.split(',')
-    # gold label 
+    # the first value in the vector is the gold label
     correct_label = int(all_values[0])
-    # scale inputs
+    # rescale input vector to match activation function (range 0.1 - 0.99)
     inputs = (numpy.asfarray(all_values[1:]) / 255.0 * 0.99) + 0.1
-    # query the network 
+    # work the inputs through the network, obtain nn classification
+    # the output structure is an array with a probability prediction for each label
     outputs = nn.query(inputs)
-    
-    # the highest number == label
+    # the highest probability corresponds to the label / classified number
     label = numpy.argmax(outputs)
     #print(label, "network's answer")
     
@@ -85,7 +85,6 @@ for record in test_data:
         scorecard.append(1)
     else:
         scorecard.append(0)
-    # pass 
     
 
 # Calculate performance (% correct answers)
