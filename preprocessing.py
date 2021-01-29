@@ -26,7 +26,7 @@ pos_list_train, tok_list_train = preprocess(pos_tags_train, tokens_train)
 #### TEST SET 
 pos_tags_test = dataset['test']['pos_tags']
 tokens_test = dataset['test']['tokens']
-# get separate lists for pos_tags and tokens 
+# get separate lists for pos_tags and tokens
 pos_list_test, tok_list_test = preprocess(pos_tags_test, tokens_test)
 
 # match each token with the corresponding POS and add them to a list

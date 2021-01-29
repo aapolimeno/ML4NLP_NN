@@ -1,6 +1,5 @@
 import numpy
 import scipy.special # for sigmoid: expit()
-#%matplotlib inline
 
 class neuralNetwork: 
     
@@ -9,7 +8,7 @@ class neuralNetwork:
         """
         the number of input, hidden and output layer nodes can be defined by parameters. 
         in this function, they are defined so that they can be used later.
-        moreover, the weights (from input to hidden, from hidden to output) are initialized.
+        also, the weights (from input to hidden, from hidden to output) are initialized.
         
         :param inputnodes: specify the number of input nodes 
         :param hiddennodes: specify the number of hidden nodes 
@@ -97,14 +96,13 @@ class neuralNetwork:
         self.wih += self.lr * numpy.dot((hidden_errors * hidden_outputs * (1.0 - hidden_outputs)), 
                                         numpy.transpose(inputs))
     
-        
-        #pass
-    
     # query the NN
     def query(self, inputs_list):
         """
         Takes the input and returns the predicted labels (output)
-        
+        The output takes the form of an array containing probabilities for each label
+        The highest probability corresponds to the predicted label
+
         :param inputs_list: inputs_list
         :return: final_outputs 
         
