@@ -33,24 +33,26 @@ with open(test_path, "r") as infile:
 # with only the gold label filled with a high number (0.99), and the rest
 # filled with a low number (0.01). 
 
+# use enough epochs to avoid overfitting
+# should be range 3-8 for this task
 epochs = 5
 
 for e in range(epochs):
     for record in training_data: 
-        # split on commas
+        # save lines of the training data set to variable
         all_values = record.split(',')
         
-        # scale inputs
+        # scale inputs (to range 0.1 - 0.99)
         inputs = (numpy.asfarray(all_values[1:]) / 255.0 * 0.99) + 0.1
-        #print(len(inputs))
-        # create target outputs 
+        # create target outputs with shape of output_nodes
+        # so an array of 12 positions, all with a value of 0.01
         targets = numpy.zeros(output_nodes) + 0.01
-        #print(len(targets))
-        # select relevant target label for the current record
+        # set the value of the target to 0.99
         targets[int(all_values[0])] = 0.99
-       # nn.train(inputs, targets)
-    
-#### test nn with a scorecard 
+        # start training nn with  the rescaled inputs and target array
+        nn.train(inputs, targets)
+
+## test nn with a scorecard
 # the following code loops through all data points in the test data,
 # and splits them in order to extract the gold label and the input vector.
 # the input vector is converted to an array, and is transformed 
@@ -65,11 +67,10 @@ for e in range(epochs):
 
 scorecard = []
 for record in test_data: 
-    # split on commas
+    # split on commas, results in the following structure: ['gol
     all_values = record.split(',')
     # gold label 
     correct_label = int(all_values[0])
-    
     # scale inputs
     inputs = (numpy.asfarray(all_values[1:]) / 255.0 * 0.99) + 0.1
     # query the network 
