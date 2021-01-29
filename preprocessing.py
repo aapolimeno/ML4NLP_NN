@@ -4,7 +4,8 @@ import csv
 
 dataset = load_dataset("conll2002", "nl")
 
-# see structure of dataset 
+# see structure of dataset
+print("structure of the data set:")
 print(dataset)
 
 ##### DEV SET 
@@ -35,3 +36,15 @@ filepath = "data/pos_data_train.csv"
 with open(filepath, 'w', newline = "") as outfile:
     writer = csv.writer(outfile, delimiter=';')
     writer.writerows(data_train)
+
+filepath = "data/pos_data_test.csv"
+with open(filepath, 'w', newline = "") as outfile:
+    writer = csv.writer(outfile, delimiter=';')
+    writer.writerows(data_test)
+
+filepath = "data/pos_data_dev.csv"
+with open(filepath, 'w', newline = "") as outfile:
+    writer = csv.writer(outfile, delimiter=';')
+    writer.writerows(data_dev)
+
+print('done, you can find your .csv files in the data folder')
